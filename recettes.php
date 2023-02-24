@@ -1,6 +1,12 @@
 <?php
     require_once('templates/header.php');
     require_once('lib/recipe.php');
+
+    $sql = 'SELECT * FROM recipes ORDER BY id DESC';
+
+    $query = $pdo ->prepare($sql);
+    $query->execute();
+    $recipes = $query->fetchAll();
 ?>
 
     <div class="container col-xxl-8 px-4 py-5">
