@@ -7,12 +7,12 @@ function getRecipeById(PDO $pdo, int $id){
     return $query->fetch();
 }
 
-function getRecipeImage(?string $image){
-        if ($image === null){
-                return _ASSETS_IMG_PATH_.'recipe_default.jpg';
-            } else{
-                return _RECIPES_IMG_PATH_.$image;
-            }
+function getRecipeImage(string|null $image) {
+    if ($image === null) {
+        return _ASSETS_IMG_PATH_.'recipe_default.jpg';
+    } else {
+        return _RECIPES_IMG_PATH_.$image;
+    }
 }
 
 function getRecipes(PDO $pdo, int $limit = null){
@@ -31,8 +31,8 @@ function getRecipes(PDO $pdo, int $limit = null){
     return $query->fetchAll();
 }
 
-function saveRecipe(PDO $pdo, int $category, string $title, string $description, string $ingredients, string $instructions, string $image = null){
-    $sql = "INSERT INTO `recipes` (`id`, `category_id`, `title`, `description`, `ingredients`, `instructions`, 'image') VALUES (NULL, :category_id, :title, :description, :ingredients, :instructions, :image)";
+function saveRecipe(PDO $pdo, int $category, string $title, string $description, string $ingredients, string $instructions, string|null $image) {
+    $sql = "INSERT INTO `recipes` (`id`, `category_id`, `title`, `description`, `ingredients`, `instructions`, `image`) VALUES (NULL, :category_id, :title, :description, :ingredients, :instructions, :image);";
     $query = $pdo->prepare($sql);
     $query->bindParam(':category_id', $category, PDO::PARAM_INT);
     $query->bindParam(':title', $title, PDO::PARAM_STR);
