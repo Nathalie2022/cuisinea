@@ -1,6 +1,7 @@
 <?php 
 require_once('lib/config.php');
 require_once('lib/pdo.php');
+require_once('lib/session.php');
 
 $currentPage = basename($_SERVER['SCRIPT_NAME']);
 
@@ -23,7 +24,7 @@ $currentPage = basename($_SERVER['SCRIPT_NAME']);
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <a href="index.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                <img src="assets/images/logo-cuisinea-horizontal.jpg" alt="logo Cuisinea" width="250">
+                <img src="assets/images/logo-cuisinea-horizontal.jpg" alt="logo Cuisinea" width="200">
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 nav nav-pills">
@@ -34,8 +35,12 @@ $currentPage = basename($_SERVER['SCRIPT_NAME']);
             </ul>
 
             <div class="col-md-3 text-end">
-                <button type="button" class="btn btn-outline-primary me-2">Login</button>
-                <button type="button" class="btn btn-primary">Sign-up</button>
+                <?php if(!isset($_SESSION['user'])){?>
+                    <a href="login.php" class="btn btn-outline-primary me-2">Se connecter</a>
+                    <a href="inscription.php" class="btn btn-outline-primary me-2">S'inscrire</a>
+                <?php }else{?>
+                <a href="logout.php" class="btn btn-primary">Se déconnecter</a>
+                <?php }?>
             </div>
         </header>
     </div>

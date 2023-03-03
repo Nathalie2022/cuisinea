@@ -1,8 +1,14 @@
 <?php
     require_once('templates/header.php');
+
+    if(!isset($_SESSION['user'])){
+        header('location: login.php');
+    }
+
+
     require_once('lib/tools.php');
     require_once('lib/recipe.php');
-    require_once('lib/category.php');
+    require_once('lib/category.php'); 
 
     $errors = [];
     $messages = [];
@@ -57,13 +63,13 @@
 </div>
 
 <?php foreach ($messages as $message) { ?>
-    <div class="alert alert-success container col-xxl-8 px-4 py-5">
+    <div class="alert alert-success container col-xxl-8 px-4 py-3">
         <?=$message;?>
     </div>
 <?php }?>
 
 <?php foreach ($errors as $error) { ?>
-    <div class="alert alert-danger container col-xxl-8 px-4 py-5">
+    <div class="alert alert-danger container col-xxl-8 px-4 py-3">
         <?=$error;?>
     </div>
 <?php }?>
